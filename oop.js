@@ -6,7 +6,7 @@ class Car {
   wheels = 4;
   drive() {
     console.log("This " + this.color + " car is driving");
-  }
+  }  
 }
 
 const newCar = new Car();

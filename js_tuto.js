@@ -126,3 +126,23 @@ console.log(res);
 let user = { name: "Bob", age: 17 }
 let status = user.age >= 18 ? "Authorized" : "Unauthorized"
 console.log(status);
+
+
+let nums4 = [11, 22, -1 , 44]
+for(let i=0; i < nums4.length; i++) {
+ if(nums4[i] < 0) break
+ console.log(nums4[i])
+}
+// 11
+// 22
+
+
+let Iterable_Object = "Iterable Object";
+for (let val of Iterable_Object){
+  console.log(val);
+};
+
+let sampleObj = {name:"mgmg",age:20};
+for (let key in sampleObj){
+  console.log(sampleObj[key]);
+}

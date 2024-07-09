@@ -113,7 +113,7 @@ let ronaldo = 7;
 console.log(typeof ronaldo.toString());
 
 let fav_soccerClub = "Man_U"
-console.log(typeof parseInt(fav_soccerClub));
+console.log(typeof parseInt(fav_soccerClub));     // type -> number || output -> NaN
 
 
 

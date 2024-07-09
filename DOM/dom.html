@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM</title>
+  </head>
+  <body>
+    <div class="demo">hi</div>
+    <input type="text" name="test" id="test" value="" />
+    <div class="item-container">
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+    </div>
+    <div class="querySelector">
+        <div class="class">class1</div>
+        <div class="class">class2</div>
+        <div class="class">class3</div>
+        <div class="class" id="id">id</div>
+    </div>
+  </body>
+  <script>
+    document.write("DOM document object model");
+    let div = document.getElementsByClassName("demo")[0];
+    console.log((div.style.display = "none"));
+    console.log((document.body.style.background = "#ff00ff"));
+    console.log(document.scripts[1]);
+    console.log(document.getElementsByTagName("input")[0].name);
+
+    let item = document.getElementsByClassName("item");
+    for (let i = 0; i < item.length; i++) {
+      item[i].innerHTML = "hello world " + i;
+    };
+    // (queueMicrotask(document.write("heyyyyyyyyyyyyyyyy")));
+    let selector = document.querySelector("#id");
+    console.log(selector);
+    let selectorAll = document.querySelectorAll(".querySelector .class");
+    console.log(selectorAll[0]);
+    console.log(selectorAll[1]);
+  </script>
+</html>

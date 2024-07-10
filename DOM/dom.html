@@ -28,19 +28,18 @@
     console.log((document.body.style.background = "#ff00ff"));
     console.log(document.scripts[1]);
 
-    // 
+    //
     let input = document.getElementsByTagName("input");
     input[0].value = "hello";
     input[1].addEventListener("click", function () {
       console.log(input[0].value);
     });
-    function test(btn){
-      console.log("==="+btn);
-      btn.style.background = "red"
-     
+    function test(btn) {
+      console.log("===" + btn);
+      btn.style.background = "red";
     }
 
-    // 
+    //
     let item = document.getElementsByClassName("item");
     for (let i = 0; i < item.length; i++) {
       item[i].innerHTML = "hello world " + i;
@@ -61,20 +60,49 @@
     console.log(selectorAll[1]);
     document.getElementsByClassName("item")[1].innerHTML = "mr chan";
 
-    // 
+    //
     let mouseOver = document.createElement("button");
     mouseOver.style.display = "block";
     document.body.append(mouseOver);
     console.log((mouseOver.innerHTML = "Over ME "));
     mouseOver.addEventListener("mouseover", (e) => {
-      console.log(this);  
+      console.log(this);
       console.log(e.target);
-      e.target.style.color = "red"
+      e.target.style.color = "red";
       mouseOver.style.background = "gold";
       mouseOver.style.padding = "10px";
       mouseOver.style.borderRadius = "10px";
     });
 
+    //
+    let element = document.createElement("div");
+    let p = document.createElement("p");
+    let p2 = document.createElement("p");
+    p.innerText = "p tag";
+    p2.innerText = "p2 tag";
+    let textNode = document.createTextNode("hello world!");
+    console.log(typeof element);
+    console.log(typeof textNode);
+    document.body.appendChild(element).append(textNode);
+    element.insertBefore(p, element.firstChild);
+    element.insertBefore(p2, element.lastChild);
+
+    // setAttribute()
+    let hello = document.createElement("b");
+    hello.textContent = "Hello DOM.";
+    hello.setAttribute("title", "A new element");   
+    document.body.appendChild(hello);
+
+    // classList ->add(),remove(),toggle()
+    let image = document.createElement("img");
+    image.classList.add("img","img2");
+    image.src = "https://cdn.pixabay.com/photo/2024/05/13/19/19/ufo-8759621_640.png";
+    image.style.width = "200px"
+    document.body.append(image);
+    image.addEventListener("mouseover",function(){
+      this.src = "https://cdn.pixabay.com/photo/2024/03/25/20/30/german-shorthaired-pointer-8655457_640.jpg"
+    });
+    
 
   </script>
 </html>

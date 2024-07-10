@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #box {
+      margin: 14rem auto;
+      position: relative;
+      width: 800px;
+      height: 30px;
+      padding: 10px;
+      background: #00ffff;
+      border: 2px solid #0f0f0f;
+    }
+    #ball {
+      position: absolute;
+      left: 2;
+      top: 50;
+      width: 30px;
+      height: 30px;
+      border-radius: 30px;
+      background-color: #0f0f6f;
+    }
+  </style>
+</head>
+<body>
+  <div id="box">
+    <div id="ball"></div>
+  </div>
+</body>
+<script>
+  let ball = document.getElementById("ball");
+  console.log(ball);
+  let left =0;
+  let direction = "right";
+
+  setInterval(()=>{
+    if(direction == "right"){
+        left ++;
+        if(left >790) direction = "left"
+    }else if (direction == "left"){
+        left --;
+        if(left < 0) direction = "right"
+    }
+    ball.style.left = `${left}px`;
+  },20)
+</script>
+</html>

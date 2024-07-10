@@ -8,16 +8,17 @@
   <body>
     <div class="demo">hi</div>
     <input type="text" name="test" id="test" value="" />
+    <input type="button" value="Register" onclick="test(this)" />
     <div class="item-container">
       <div class="item"></div>
       <div class="item"></div>
       <div class="item"></div>
     </div>
     <div class="querySelector">
-        <div class="class">class1</div>
-        <div class="class">class2</div>
-        <div class="class">class3</div>
-        <div class="class" id="id">id</div>
+      <div class="class">class1</div>
+      <div class="class">class2</div>
+      <div class="class">class3</div>
+      <div class="class" id="id">id</div>
     </div>
   </body>
   <script>
@@ -26,17 +27,54 @@
     console.log((div.style.display = "none"));
     console.log((document.body.style.background = "#ff00ff"));
     console.log(document.scripts[1]);
-    console.log(document.getElementsByTagName("input")[0].name);
 
+    // 
+    let input = document.getElementsByTagName("input");
+    input[0].value = "hello";
+    input[1].addEventListener("click", function () {
+      console.log(input[0].value);
+    });
+    function test(btn){
+      console.log("==="+btn);
+      btn.style.background = "red"
+     
+    }
+
+    // 
     let item = document.getElementsByClassName("item");
     for (let i = 0; i < item.length; i++) {
       item[i].innerHTML = "hello world " + i;
-    };
+    }
+    console.log(Array.isArray(Array.from(item)));
+    Array.from(item).forEach(function (i) {
+      i.style.color = "red";
+      i.style.background = "green";
+      i.style.textAlign = "center";
+      // console.log(this);
+    });
+
     // (queueMicrotask(document.write("heyyyyyyyyyyyyyyyy")));
     let selector = document.querySelector("#id");
     console.log(selector);
     let selectorAll = document.querySelectorAll(".querySelector .class");
     console.log(selectorAll[0]);
     console.log(selectorAll[1]);
+    document.getElementsByClassName("item")[1].innerHTML = "mr chan";
+
+    // 
+    let mouseOver = document.createElement("button");
+    mouseOver.style.display = "block";
+    document.body.append(mouseOver);
+    console.log((mouseOver.innerHTML = "Over ME "));
+    mouseOver.addEventListener("mouseover", (e) => {
+      console.log(this);  
+      console.log(e.target);
+      e.target.style.color = "red"
+      mouseOver.style.background = "gold";
+      mouseOver.style.padding = "10px";
+      mouseOver.style.borderRadius = "10px";
+    });
+
+
   </script>
 </html>

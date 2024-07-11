@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <input type="text" name="" id="" oninput="uppercase(this) " value="">
+    </div>
+    <div class="date">
+        <button>Get Date</button>
+    </div>
+</body>
+<script>
+    let input = document.querySelector(".container input");
+    function uppercase(e){
+       e.value = e.value.toUpperCase();
+    }
+    let date_btn = document.querySelector(".date button");
+    date_btn.addEventListener("click",function (){
+        console.log(this);
+        let day = new Date().getUTCDate();
+        let month = new Date().getMonth()+1;
+        let year = new Date().getFullYear();
+        let h2 = document.createElement("h2");
+        h2.innerHTML = `${day}/${month}/${year}`
+        document.body.append(h2)
+    })
+    
+</script>
+</html>

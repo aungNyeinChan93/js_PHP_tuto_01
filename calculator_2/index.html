@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator_02</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        color: whitesmoke;
+      }
+      .calculator {
+        border-radius: 10px;
+        padding: 10px;
+        margin: 50px auto;
+        position: relative;
+        background: #cee5ec;
+        width: 415px;
+        height: 390px;
+        box-shadow: 1px 1px 1px 2px rgba(10, 4, 27, 0.911);
+      }
+      .result {
+        font-size: 2rem;
+        text-align: end;
+        margin: 6px auto;
+        border-radius: 10px;
+        width: 90%;
+        padding: 10px;
+        height: 50px;
+        background-color: rgba(102, 96, 96, 0.356);
+        box-shadow: 1px 1px 1px 2px rgb(10, 4, 27);
+        margin-bottom: 20px;
+      }
+      button {
+        font-size: 1rem;
+        margin: 1px auto;
+        width: 89px;
+        height: 60px;
+        margin: 5px;
+        padding: 5px;
+        border: none;
+        border-radius: 10px;
+        box-shadow: 4px 4px 4px rgb(110, 104, 104);
+      }
+      button:active {
+        width: 88px;
+        height: 55px;
+        color: crimson;
+        font-size: 0.9rem;
+        background-color: #dbee71;
+        transition: 0.3s;
+      }
+      .AC {
+        color: rgb(34, 33, 31);
+        background-color: orange;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="calculator">
+      <div class="result">0</div>
+      <button class="AC">AC</button>
+      <button onclick="getvalue(this)">7</button>
+      <button onclick="">8</button>
+      <button onclick="">9</button>
+      <button onclick="">+</button>
+      <button onclick="">4</button>
+      <button onclick="">5</button>
+      <button onclick="">6</button>
+      <button onclick="">-</button>
+      <button onclick="">1</button>
+      <button onclick="">2</button>
+      <button onclick="">3</button>
+      <button onclick="">*</button>
+      <button onclick="">0</button>
+      <button onclick="">/</button>
+      <button onclick="">=</button>
+    </div>
+  </body>
+  <script>
+    function getvalue() {} // not used
+    let btns = document.querySelectorAll(".calculator button");
+    let result = document.getElementsByClassName("result")[0];
+    let temp = "";
+    let cal_res = "";
+
+    Array.from(btns).forEach((btn) => {
+      btn.addEventListener("click", function () {
+        if (this.innerText == "=") {
+          result.innerHTML = cal_res;
+        } else if (this.innerText == "AC") {
+          temp = "";
+          result.innerHTML = 0;
+        } else {
+          result.innerHTML = this.innerText;
+          temp += this.innerHTML;
+          cal_res = eval(temp);
+        }
+      });
+    });
+  </script>
+</html>

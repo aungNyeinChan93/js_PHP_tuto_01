@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Title</title>
+    <style>
+      .boxes {
+        width: 800px;
+        margin: 20px auto;
+        text-align: center;
+      }
+      .box {
+        height: 200px;
+      }
+      #box1 {
+        background: rgb(221, 20, 20);
+        display: none;
+      }
+      #box2 {
+        background: rgb(94, 231, 31);
+        display: none;
+      }
+      #box3 {
+        background: rgb(55, 46, 194);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="boxes">
+      <div class="box" id="box1"></div>
+      <div class="box" id="box2"></div>
+      <div class="box" id="box3"></div>
+      <div class="controls">
+        <button
+          style="
+            color: red;
+            padding: 5px;
+            border-radius: 10px;
+            margin-top: 10px;
+            border: none;
+          "
+          id="prev"
+        >
+          &laquo; Prev
+        </button>
+        <button
+          style="
+            color: red;
+            padding: 5px;
+            border-radius: 10px;
+            margin-top: 10px;
+            border: none;
+          "
+          id="next"
+        >
+          Next &raquo;
+        </button>
+      </div>
+    </div>
+  </body>
+  <script>
+    let box = 1;
+    function next() {
+      document.querySelector(`#box${box}`).style.display = "none";
+      box++;
+      if (box > 3) box = 1;
+      document.querySelector(`#box${box}`).style.display = "block";
+    }
+    function prev() {
+      document.querySelector(`#box${box}`).style.display = "none";
+      box--;
+      if (box < 1) box = 3;
+      document.querySelector(`#box${box}`).style.display = "block";
+    }
+    document.querySelector("#next").onclick = next;
+    document.querySelector("#prev").onclick = prev;
+    setInterval(next, 2000);
+  </script>
+</html>

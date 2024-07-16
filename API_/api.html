@@ -43,6 +43,7 @@
     <div class="searchBar">
       <input type="text" value="" id="text" onkeyup="searchItem(this)">
     </div>
+    <h1 class="notfound" style="text-align: center;color:red;"></h1>
     <table class="table" >
       <tr>
         <th>ID</th>
@@ -67,7 +68,7 @@
             <td>${item.title}</td>
             <td> <img src=${item.image} alt="image"> </td>
           </tr>`;
-            console.log(temp);
+            // console.log(temp);
           let table = document.getElementsByClassName("table")[0];
           table.innerHTML += temp;
         }
@@ -76,12 +77,13 @@
     } catch (error) {
         console.warn("ERROR ",error);
     }
+
+
     function searchItem(e){
       // console.log(this);
       // console.log(e.value);
       let inputValue = e.value.toUpperCase();
       let tableRole = document.getElementsByClassName("table")[0].getElementsByTagName("tr");
-      let td;
       let table_data; 
       Array.from(tableRole).forEach((tr)=>{
         td = tr.getElementsByTagName("td")[1];
@@ -90,9 +92,16 @@
           // console.log(table_data);
           if(table_data.toUpperCase().indexOf(inputValue)>-1){
             tr.style.display = "";
+            document.getElementsByClassName("notfound")[0].style.display = "none";
+            document.getElementsByClassName("table")[0].style.display = ""
+
           }else{
-            tr.style.display = "none"
+            tr.style.display = "none"   
+            document.getElementsByClassName("notfound")[0].style.display = "";
+            document.getElementsByClassName("table")[0].style.display = "none"
           }
+        }else{
+          document.getElementsByClassName("notfound")[0].innerHTML = "Not found";
         }
       })
     }

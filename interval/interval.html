@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interval</title>
+</head>
+<body>
+    
+</body>
+<script>
+    let sec = 0;
+    let min = 0;
+    setInterval(()=>{
+        // console.log(sec);
+        sec++;
+        if(sec>60){
+            sec = 0;
+        }
+    },100);
+    setTimeout(()=>{
+        min++;
+        // console.log(min);
+    },6000)
+    clearInterval();
+</script>
+</html>

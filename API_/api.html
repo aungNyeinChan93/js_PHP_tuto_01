@@ -45,7 +45,7 @@
     </div>
     <h1 class="notfound" style="text-align: center;color:red;"></h1>
     <table class="table" >
-      <tr>
+      <tr class="th">
         <th>ID</th>
         <th>Title</th>
         <th>Photo</th>
@@ -89,19 +89,15 @@
         td = tr.getElementsByTagName("td")[1];
         if(td){
           table_data = td.innerHTML;
-          // console.log(table_data);
           if(table_data.toUpperCase().indexOf(inputValue)>-1){
             tr.style.display = "";
-            document.getElementsByClassName("notfound")[0].style.display = "none";
-            document.getElementsByClassName("table")[0].style.display = ""
-
+            document.getElementsByClassName("th")[0].style.display = "";
+            document.getElementsByClassName("notfound")[0].innerHTML= "";
           }else{
             tr.style.display = "none"   
-            document.getElementsByClassName("notfound")[0].style.display = "";
-            document.getElementsByClassName("table")[0].style.display = "none"
+            document.getElementsByClassName("notfound")[0].innerHTML = "Not found";
+            document.getElementsByClassName("th")[0].style.display = "none";
           }
-        }else{
-          document.getElementsByClassName("notfound")[0].innerHTML = "Not found";
         }
       })
     }

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        .container {
+            margin: 100px auto;
+            width: 500px;
+            background-color: rebeccapurple;
+            text-align: center;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .dark {
+            background-color: black;
+            color: white;
+        }
+        .red{
+            background-color: red;
+        }
+        button{
+            padding: 9px;
+            width: 100px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Light mode || Dark Mode</h1>
+        <h3>Dark Mode</h3>
+        <button>OFF</button>
+    </div>
+</body>
+<script>
+    $(document).ready(() => {
+        $("button").click(function () {
+            if ($("button").html() === "OFF") {
+                $("button").html("ON")
+                $("button").addClass("red")
+                $("body").addClass("dark")
+            } else {
+                $("button").html("OFF")
+                $("button").removeClass("red")
+                $("body").removeClass("dark")
+            }
+        })
+    })
+</script>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 class="header">Jquary</h1>
+    <button class="hideBtn">hide/unhide</button>
+    <input type="text" name="" id="input" />
+    <button class="inputBtn">click</button>
+
+    <div class="p" style="background-color: rgb(104, 37, 190);height: 200px;width: 800px;">
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius quas porro neque!</p>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius quas porro neque!</p>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius quas porro neque!</p>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius quas porro neque!</p>
+    </div>
+    <button class="pBtn">Empty </button>
+
+</body>
+<script>
+    $(document).ready(function () {
+        console.log($(".header").html());
+        $(".header").click(function () {
+            $(this).html("<h1>change</h1>");
+        });
+        $(".hideBtn").click(() => {
+            $(".header").toggle(500);
+        });
+        $(".inputBtn").click(() => {
+            $(".header").html($("#input").val());
+        });
+        $(".pBtn").click(function () {
+            $(".p").empty();
+        })
+
+        // ajax api fetching
+        try {
+            $.ajax({
+                url: "https://fakestoreapi.com/products",
+                type: "get",
+                success: function (res) {
+                    console.log(res);
+                }
+            })
+        } catch (error) {
+            console.log(error);
+        } finally {
+            console.log("this is over!");
+        };
+
+
+
+
+
+    });
+</script>
+
+</html>

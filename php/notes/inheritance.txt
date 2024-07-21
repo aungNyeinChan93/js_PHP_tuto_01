@@ -1,0 +1,82 @@
+Inheritance is a fundamental concept in object-oriented programming (OOP) 
+that allows a class to inherit properties and methods from another class. 
+This promotes code reuse and establishes a hierarchical relationship between classes.
+
+### Key Concepts of Inheritance in PHP
+
+1. **Parent Class (Superclass)**: The class whose properties and methods are inherited.
+2. **Child Class (Subclass)**: The class that inherits properties and methods from the parent class.
+
+### Syntax
+To implement inheritance in PHP, use the `extends` keyword:
+
+```php
+class ParentClass {
+    public $property;
+
+    public function method() {
+        echo "This is a method from the parent class.";
+    }
+}
+
+class ChildClass extends ParentClass {
+    public function childMethod() {
+        echo "This is a method from the child class.";
+    }
+}
+
+$child = new ChildClass();
+$child->method(); // Calls the method from the parent class
+$child->childMethod(); // Calls the method from the child class
+```
+
+### Example
+Here's a more detailed example:
+
+```php
+class Animal {
+    public $name;
+    public $species;
+
+    public function __construct($name, $species) {
+        $this->name = $name;
+        $this->species = $species;
+    }
+
+    public function describe() {
+        return "This is a {$this->species} named {$this->name}.";
+    }
+}
+
+class Dog extends Animal {
+    public function bark() {
+        return "Woof! Woof!";
+    }
+}
+
+$dog = new Dog("Buddy", "dog");
+echo $dog->describe(); // Outputs: This is a dog named Buddy.
+echo $dog->bark();     // Outputs: Woof! Woof!
+```
+
+### Key Points
+- **Access Modifiers**: The child class inherits all public and protected properties and methods from the parent class. Private properties and methods are not inherited.
+- **Overriding Methods**: The child class can override methods from the parent class to provide a specific implementation.
+- **Calling Parent Methods**: The child class can call methods from the parent class using the `parent::` keyword.
+
+### Practical Use Case
+Inheritance is useful for creating a base class with common functionality and extending it to create more specific classes. 
+For example, you might have a `Vehicle` class with common properties like `make` and `model`,
+and then extend it to create `Car` and `Truck` classes with additional properties and methods specific to those types of vehicles¹².
+
+Would you like to explore more about other OOP concepts in PHP?
+
+¹: [PHP OOP Inheritance - W3Schools](https://www.w3schools.com/PHP/php_oop_inheritance.asp)
+²: [What is Inheritance in PHP? - GeeksforGeeks](https://www.geeksforgeeks.org/what-is-inheritance-in-php/)
+
+Source: Conversation with Copilot, 7/21/2024
+(1) PHP OOP Inheritance - W3Schools. https://www.w3schools.com/PHP/php_oop_inheritance.asp.
+(2) What is Inheritance in PHP? - GeeksforGeeks. https://www.geeksforgeeks.org/what-is-inheritance-in-php/.
+(3) PHP Inheritance - Scaler Topics. https://www.scaler.com/topics/php-tutorial/inheritance-in-php/.
+(4) PHP – Inheritance - Online Tutorials Library. https://www.tutorialspoint.com/php/php_inheritance.htm.
+(5) PHP OOP Inheritance - W3docs. https://www.w3docs.com/learn-php/php-inheritance.html.

@@ -1,0 +1,90 @@
+Polymorphism is a core concept in object-oriented programming (OOP) that allows objects of different classes to be treated as objects of a common superclass. This enables methods to perform different actions based on the object they are called upon, enhancing code flexibility and reusability.
+
+### Implementing Polymorphism in PHP
+
+#### Using Abstract Classes
+Abstract classes can define methods that must be implemented by any subclass. This allows different subclasses to provide their own implementation of the method.
+
+```php
+abstract class Person {
+    abstract public function greet();
+}
+
+class English extends Person {
+    public function greet() {
+        return "Hello!";
+    }
+}
+
+class German extends Person {
+    public function greet() {
+        return "Hallo!";
+    }
+}
+
+class French extends Person {
+    public function greet() {
+        return "Bonjour!";
+    }
+}
+
+function greeting(array $people) {
+    foreach ($people as $person) {
+        echo $person->greet() . "<br>";
+    }
+}
+
+$people = [new English(), new German(), new French()];
+greeting($people);
+```
+
+In this example, the `greet` method is implemented differently in each subclass, but they all share the same interface defined by the `Person` abstract class¹.
+
+#### Using Interfaces
+Interfaces can also be used to achieve polymorphism. Any class that implements an interface must provide implementations for all of its methods.
+
+```php
+interface Shape {
+    public function draw();
+}
+
+class Circle implements Shape {
+    public function draw() {
+        return "Drawing circle.";
+    }
+}
+
+class Square implements Shape {
+    public function draw() {
+        return "Drawing square.";
+    }
+}
+
+function drawShapes(array $shapes) {
+    foreach ($shapes as $shape) {
+        echo $shape->draw() . "<br>";
+    }
+}
+
+$shapes = [new Circle(), new Square()];
+drawShapes($shapes);
+```
+
+Here, both `Circle` and `Square` classes implement the `Shape` interface, allowing them to be used interchangeably in the `drawShapes` function².
+
+### Advantages of Polymorphism
+- **Flexibility**: Allows for writing more generic and reusable code.
+- **Maintainability**: Adding new classes that implement the same interface or extend the same abstract class does not require changes to existing code.
+- **Reduced Coupling**: Promotes loose coupling between classes, making the system more modular and easier to manage.
+
+Would you like to dive deeper into any other OOP concepts in PHP?
+
+¹: [PHP Polymorphism Explained Clearly By Examples](https://www.phptutorial.net/php-oop/php-polymorphism/)
+²: [How to implement Polymorphism in PHP? - GeeksforGeeks](https://www.geeksforgeeks.org/how-to-implement-polymorphism-in-php/)
+
+Source: Conversation with Copilot, 7/21/2024
+(1) PHP Polymorphism Explained Clearly By Examples. https://www.phptutorial.net/php-oop/php-polymorphism/.
+(2) How to implement Polymorphism in PHP? - GeeksforGeeks. https://www.geeksforgeeks.org/how-to-implement-polymorphism-in-php/.
+(3) PHP Polymorphism Explained ( By Examples ) - Scaler Topics. https://www.scaler.com/topics/php-tutorial/polymorphism-in-php/.
+(4) Polymorphism in PHP Explained [With Examples] | upGrad blog. https://www.upgrad.com/blog/polymorphism-in-php/.
+(5) Polymorphism in PHP - Naukri Code 360. https://www.naukri.com/code360/library/polymorphism-in-php.

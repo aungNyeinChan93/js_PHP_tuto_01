@@ -1,0 +1,62 @@
+invoke method -> __invoke();
+
+The `__invoke` magic method in PHP is a special method that allows an object to be called as a function. 
+When an object is called in this way, PHP automatically invokes the `__invoke` method if it is defined in the class.
+
+### Syntax
+```php
+public function __invoke(...$arguments): mixed
+```
+
+### Example
+Here's a simple example to illustrate how `__invoke` works:
+
+```php
+class CallableClass {
+    public function __invoke($x) {
+        var_dump($x);
+    }
+}
+
+$obj = new CallableClass();
+$obj(5); // This will call the __invoke method
+```
+
+In this example, when `$obj(5)` is executed, it calls the `__invoke` method of the `CallableClass` object, and the output will be:
+```
+int(5)
+```
+
+### Practical Use Case
+The `__invoke` method can be particularly useful in scenarios where you want to create callable objects, also known as functors. For example, you can use it to create a comparator for sorting:
+
+```php
+class Comparator {
+    private $key;
+
+    public function __construct(string $key) {
+        $this->key = $key;
+    }
+
+    public function __invoke($a, $b) {
+        return $a[$this->key] <=> $b[$this->key];
+    }
+}
+
+$customers = [
+    ['id' => 1, 'name' => 'John', 'credit' => 20000],
+    ['id' => 3, 'name' => 'Alice', 'credit' => 10000],
+    ['id' => 2, 'name' => 'Bob', 'credit' => 15000]
+];
+
+usort($customers, new Comparator('name'));
+```
+
+In this case, the `Comparator` class implements the `__invoke` method to compare elements by a specified key, making it easy to sort arrays using custom logic².
+
+Would you like to know more about other magic methods in PHP?
+
+(1) A Practical Guide to PHP __invoke Magic Method - PHP Tutorial. https://www.phptutorial.net/php-oop/php-__invoke/.
+(2) PHP: Magic Methods - Manual. https://www.php.net/manual/en/language.oop5.magic.php.
+(3) PHP’s Magic __invoke() Method and the Callable Typehint. https://lornajane.net/posts/2012/phps-magic-__invoke-method-and-the-callable-typehint.
+(4) github.com. https://github.com/zeroyukiy/php-random-files/tree/2ee24cac7db05bc6dbbe099538838e5d8c5ad6b6/oop%2FmagicMethods%2Finvoke.php.

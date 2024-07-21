@@ -1,0 +1,67 @@
+Encapsulation is a fundamental concept in object-oriented programming (OOP) that helps protect the internal state of an object and ensures that it can only be modified in controlled ways. In PHP, encapsulation is achieved by using access modifiers to restrict access to the properties and methods of a class.
+
+### Key Concepts of Encapsulation
+
+1. **Access Modifiers**:
+   - **Private**: The property or method can only be accessed within the class itself.
+   - **Protected**: The property or method can be accessed within the class and by classes derived from that class.
+   - **Public**: The property or method can be accessed from anywhere.
+
+2. **Getter and Setter Methods**:
+   - These methods allow controlled access to the properties of a class. Getters retrieve the value of a property, while setters modify the value.
+
+### Example
+Here's an example to illustrate encapsulation in PHP:
+
+```php
+class User {
+    private $name;
+    private $email;
+
+    // Getter for name
+    public function getName() {
+        return $this->name;
+    }
+
+    // Setter for name
+    public function setName($name) {
+        $this->name = $name;
+    }
+
+    // Getter for email
+    public function getEmail() {
+        return $this->email;
+    }
+
+    // Setter for email
+    public function setEmail($email) {
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $this->email = $email;
+        } else {
+            throw new Exception("Invalid email format");
+        }
+    }
+}
+
+$user = new User();
+$user->setName("John Doe");
+$user->setEmail("john.doe@example.com");
+
+echo $user->getName();  // Outputs: John Doe
+echo $user->getEmail(); // Outputs: john.doe@example.com
+```
+
+### Advantages of Encapsulation
+- **Data Hiding**: Internal state of the object is hidden from the outside world.
+- **Increased Security**: Only authorized methods can modify the properties.
+- **Improved Maintainability**: Changes to the internal implementation do not affect external code.
+
+Encapsulation helps in creating a clear structure for your code and ensures that objects are used in a predictable and controlled manner¹².
+
+Would you like to explore more about other OOP concepts in PHP?
+
+Source: Conversation with Copilot, 7/21/2024
+(1) PHP | Encapsulation - GeeksforGeeks. https://www.geeksforgeeks.org/php-encapsulation/.
+(2) What is encapsulation with simple example in php?. https://stackoverflow.com/questions/985298/what-is-encapsulation-with-simple-example-in-php.
+(3) Encapsulation in PHP - Naukri Code360 - Naukri Code 360. https://www.naukri.com/code360/library/encapsulation-in-php.
+(4) Encapsulation (OOP Principle) - Modern PHP Tutorial. https://www.php.engineer/encapsulation-principle.

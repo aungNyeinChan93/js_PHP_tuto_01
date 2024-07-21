@@ -185,3 +185,4 @@ function drawShapes(array $shapes) {
 
 $shapes = [new Circle(), new Square()];
 drawShapes($shapes);
+

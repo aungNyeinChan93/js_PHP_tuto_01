@@ -113,7 +113,7 @@ class User
     }
 }
 
-$user = new User();
+// $user = new User();
 $user->setName("John Doe");
 $user->setEmail("john.doe@example.com");
 

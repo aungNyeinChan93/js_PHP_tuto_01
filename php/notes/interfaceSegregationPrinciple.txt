@@ -1,0 +1,102 @@
+The **Interface Segregation Principle (ISP)** is one of the SOLID principles of object-oriented design. It states that no client should be forced to depend on methods it does not use. In PHP, this can be achieved by defining smaller, more specific interfaces rather than a large, general-purpose one.
+
+### Applying ISP in PHP
+
+Here's a practical example to illustrate the Interface Segregation Principle:
+
+#### Without ISP
+```php
+<?php
+
+interface WorkerInterface {
+    public function takeOrder();
+    public function cookFood();
+    public function washDishes();
+}
+
+class Waiter implements WorkerInterface {
+    public function takeOrder() {
+        echo "Taking order";
+    }
+
+    public function cookFood() {
+        // Waiters don't cook food
+        throw new Exception("Not my job");
+    }
+
+    public function washDishes() {
+        // Waiters don't wash dishes
+        throw new Exception("Not my job");
+    }
+}
+
+$waiter = new Waiter();
+$waiter->takeOrder(); // Works fine
+$waiter->cookFood(); // Throws Exception
+?>
+```
+
+In this example, the `Waiter` class is forced to implement methods it doesn't need, violating the ISP.
+
+#### With ISP
+```php
+<?php
+
+interface OrderTakerInterface {
+    public function takeOrder();
+}
+
+interface CookInterface {
+    public function cookFood();
+}
+
+interface DishwasherInterface {
+    public function washDishes();
+}
+
+class Waiter implements OrderTakerInterface {
+    public function takeOrder() {
+        echo "Taking order";
+    }
+}
+
+class Chef implements CookInterface {
+    public function cookFood() {
+        echo "Cooking food";
+    }
+}
+
+class Dishwasher implements DishwasherInterface {
+    public function washDishes() {
+        echo "Washing dishes";
+    }
+}
+
+$waiter = new Waiter();
+$waiter->takeOrder(); // Works fine
+
+$chef = new Chef();
+$chef->cookFood(); // Works fine
+
+$dishwasher = new Dishwasher();
+$dishwasher->washDishes(); // Works fine
+?>
+```
+
+In this improved example, each class implements only the methods it needs, adhering to the ISP. This makes the code more modular, easier to maintain, and less prone to errors.
+
+### Benefits of ISP
+- **Improved Code Readability**: Smaller interfaces are easier to understand.
+- **Enhanced Flexibility**: Classes can be more easily reused and extended.
+- **Reduced Risk of Errors**: Classes are not forced to implement unnecessary methods.
+
+By following the Interface Segregation Principle, you can create more robust and maintainable PHP applications.
+
+Would you like to explore more about other SOLID principles or any specific aspect of ISP?
+
+Source: Conversation with Copilot, 7/22/2024
+(1) Interface Segregation with Code Examples Explained- Stackify. https://stackify.com/interface-segregation-principle/.
+(2) Interface Segregation Principle (ISP) By Using PHP : SOLID Principle. https://dev.to/razabangi/interface-segregation-principle-isp-by-using-php-solid-principle-cb5.
+(3) Mastering SOLID Principles in PHP: Real-World Examples. https://codewitholgun.com/mastering-solid-principles-in-php-real-world-examples.
+(4) Interface Segregation Principle - PHP 7: Real World Application .... https://www.oreilly.com/library/view/php-7-real/9781787129009/ch23s04.html.
+(5) The Interface Segregation Principle | by Richard Toms - codeburst. https://codeburst.io/the-interface-segregation-principle-4c712a9a78c4.

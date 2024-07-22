@@ -35,7 +35,7 @@ class EmailNotifier
     public function sendEmail(User $user, $message)
     {
         // Code to send email to the user
-        echo $user->getEmail() . " <br>";
+        echo $user->getEmail() ." -->".  $message ."<br>";
     }
 }
 

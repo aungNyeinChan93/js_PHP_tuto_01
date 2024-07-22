@@ -1,0 +1,44 @@
+The **Liskov Substitution Principle (LSP)** is a key concept in object-oriented programming, and it applies to PHP as well. The principle states that objects of a superclass should be replaceable with objects of a subclass without affecting the correctness of the program. This ensures that the subclass can stand in for the superclass without altering the expected behavior of the program.
+
+Here's a simple example in PHP to illustrate the Liskov Substitution Principle:
+
+<?php
+
+class Bird {
+    public function fly() {
+        echo "Flying";
+    }
+}
+
+class Sparrow extends Bird {
+    // Inherits the fly method from Bird
+}
+
+class Ostrich extends Bird {
+    // Ostriches can't fly, so this violates LSP
+    public function fly() {
+        throw new Exception("Ostriches can't fly");
+    }
+}
+
+function makeBirdFly(Bird $bird) {
+    $bird->fly();
+}
+
+$bird = new Sparrow();
+makeBirdFly($bird); // Outputs: Flying
+
+$bird = new Ostrich();
+makeBirdFly($bird); // Throws Exception: Ostriches can't fly
+?>
+```
+
+In this example, substituting `Ostrich` for `Bird` would break the program because `Ostrich` cannot fly, violating the LSP. To adhere to LSP, you might need to rethink the class hierarchy or the methods involved.
+
+Would you like to see more examples or dive deeper into any specific aspect of LSP in PHP?
+
+Source: Conversation with Copilot, 7/22/2024
+(1) What is an example of the Liskov Substitution Principle?. https://stackoverflow.com/questions/56860/what-is-an-example-of-the-liskov-substitution-principle.
+(2) Liskov Substitution Principle in PHP • PHP.Watch. https://php.watch/articles/php-lsp.
+(3) The Liskov Substitution Principle | by Richard Toms | codeburst. https://codeburst.io/the-liskov-substitution-principle-5ba387055a2a.
+(4) Liskov Substitution Principle (LSP) Example Using PHP.. https://blog.devops.dev/liskov-substitution-principle-lsp-example-using-php-78b3c77328af.

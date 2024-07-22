@@ -1,0 +1,65 @@
+The **Open/Closed Principle (OCP)** is one of the five SOLID principles of object-oriented design. It states that software entities (such as classes, modules, and functions) should be **open for extension** but **closed for modification**. This means you should be able to add new functionality to a class without changing its existing code.
+
+### Applying OCP in PHP
+
+Here's how you can apply the Open/Closed Principle in PHP:
+
+1. **Use Interfaces and Abstract Classes**:
+   - Define interfaces or abstract classes that specify the behavior of your components.
+   - Implement these interfaces in concrete classes.
+
+2. **Extend Functionality via Inheritance**:
+   - Instead of modifying existing classes, create new subclasses that extend the functionality of the base class.
+
+3. **Use Composition Over Inheritance**:
+   - Prefer composition to inheritance to add new behaviors. This involves creating new classes that use existing classes to achieve the desired functionality.
+
+### Example
+
+Let's consider an example where we have a `Shape` interface and different shape classes:
+
+```php
+interface Shape {
+    public function draw();
+}
+
+class Circle implements Shape {
+    public function draw() {
+        // Draw a circle
+    }
+}
+
+class Square implements Shape {
+    public function draw() {
+        // Draw a square
+    }
+}
+```
+
+If we want to add a new shape, say a `Triangle`, we don't need to modify the existing `Circle` or `Square` classes. Instead, we can simply create a new class that implements the `Shape` interface:
+
+```php
+class Triangle implements Shape {
+    public function draw() {
+        // Draw a triangle
+    }
+}
+```
+
+This way, the existing code remains unchanged, and we can extend the functionality by adding new classes.
+
+### Benefits
+
+- **Reduced Risk**: Minimizes the risk of introducing bugs in existing code.
+- **Flexibility**: Makes the system more flexible and easier to maintain.
+- **Scalability**: Facilitates the addition of new features without altering existing code.
+
+By adhering to the Open/Closed Principle, you can create more robust and maintainable PHP applications¹².
+
+Would you like to see more examples or dive deeper into any specific aspect of OCP?
+
+Source: Conversation with Copilot, 7/21/2024
+(1) SOLID in PHP: The Open-Closed Principle - PHP ISSET. https://phpisset.com/solid-in-php-the-open-closed-principle.
+(2) The Open/Closed Principle with Code Examples - Stackify. https://stackify.com/solid-design-open-closed-principle/.
+(3) Mastering SOLID Principles in PHP: Real-World Examples. https://codewitholgun.com/mastering-solid-principles-in-php-real-world-examples.
+(4) Open/Closed Principle (OCP) By Using PHP : SOLID Principle. https://dev.to/razabangi/openclosed-principle-ocp-by-using-php-solid-principle-4mmf.

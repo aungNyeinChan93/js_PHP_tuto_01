@@ -54,7 +54,6 @@ $doctor_dom->get_origin();
 
 
 // encapsulation in oop
-
 class Oop_tuto{
     static $about = "OOP";
     // public function encapsulation(){

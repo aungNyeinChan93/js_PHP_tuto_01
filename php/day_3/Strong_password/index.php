@@ -25,7 +25,7 @@
         $small_leter = preg_match("/[a-z]/", $userText) ?? false;
         $special_char = preg_match("/[!@#$%^&*]/", $userText) ?? false;
         $digit_number = preg_match("/[0-9]/", $userText) ?? false;
-        if ($textLength > 5 && $textLength < 20) {
+        if ($textLength >= 5 && $textLength <= 20) {
             if ($capatalize && $small_leter && $special_char && $digit_number) {
                 echo "<h3 style='color:green;'>Your Password is Strong!</h3>" . $userText;
             } else {
@@ -40,3 +40,9 @@
 </body>
 
 </html>
+
+<script>
+    /* 
+        
+    */
+</script>

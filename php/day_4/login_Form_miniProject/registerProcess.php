@@ -30,7 +30,7 @@ if (isset($_POST["register_btn"])) {
                     session_start();
                     $register_data = [
                         "userName" => $_POST["userName"],
-                        "eamil" => $_POST["userEmail"],
+                        "email" => $_POST["userEmail"],
                         "password" => password_hash($_POST["userPassword"], PASSWORD_BCRYPT),
                     ];
                     $_SESSION["register_data"] = $register_data;

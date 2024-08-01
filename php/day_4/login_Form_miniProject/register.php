@@ -31,7 +31,7 @@
                         <?php
                         if (isset($_POST["register_btn"])) {
                             $userEmail_status = $_POST["userEmail"] == "" ? false : true;
-                            echo !$userEmail_status ? "<small class='text-danger fw-light'>Name field is required!</small>" : "";
+                            echo !$userEmail_status ? "<small class='text-danger fw-light'>Email field is required!</small>" : "";
                         }
                         ?>
                     </div>
@@ -41,7 +41,7 @@
                         <?php
                         if (isset($_POST["register_btn"])) {
                             $userPassword_status = $_POST["userPassword"] == "" ? false : true;
-                            echo !$userPassword_status ? "<small class='text-danger fw-light'>Name field is required!</small>" : "";
+                            echo !$userPassword_status ? "<small class='text-danger fw-light'>Password field is required!</small>" : "";
                         }
                         ?>
                     </div>
@@ -51,7 +51,7 @@
                         <?php
                         if (isset($_POST["register_btn"])) {
                             $userPasswordConfirm_status = $_POST["userPaasword_confirm"] == "" ? false : true;
-                            echo !$userPasswordConfirm_status ? "<small class='text-danger fw-light'>Name field is required!</small>" : "";
+                            echo !$userPasswordConfirm_status ? "<small class='text-danger fw-light'>Password field is required!</small>" : "";
                         }
                         ?>
                     </div>

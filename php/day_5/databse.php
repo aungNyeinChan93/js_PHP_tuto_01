@@ -12,3 +12,5 @@ try {
     $exp = new PDOException("DB::connection erros $error");
     echo $exp->getMessage();
 }
+
+

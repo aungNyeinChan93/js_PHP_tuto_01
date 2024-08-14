@@ -20,7 +20,7 @@ require_once "../db/connection.php";
             </div>
             <form action="updateProcess.php" method="post">
                 <input type="hidden" name="id" value="<?php echo $data['id'];?>">   
-                <input type="text" name="category" id="" class="form-control mb-3" value="<?php echo $data['name'];?>">   
+                <input type="text" name="category" id="" class="form-control mb-3" value="<?php echo $data['name']??"";?>">   
                 <input type="submit" name="update_btn" value="update" class="btn btn-sm btn-info">
             </form>
         </div>

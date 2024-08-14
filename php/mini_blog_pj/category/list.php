@@ -15,7 +15,7 @@ $categoryList = $responce->fetchAll(PDO::FETCH_ASSOC);
 
 <div class="container">
     <div class="row">
-        <div class="col-4 mt-4">
+        <div class="col-sm-12 col-lg-4 mt-4 mx-2">
             <form action="" method="post">
                 <input type="text" name="category" placeholder="Enter category name" class="form-control" id="">
                 <?php
@@ -30,8 +30,8 @@ $categoryList = $responce->fetchAll(PDO::FETCH_ASSOC);
                 </div>
             </form>
         </div>
-        <div class="col-6 mt-4">
-            <div>
+        <div class="col-sm-12 col-lg-6 mt-4">
+            <div class="mx-4">
                 <?php
                 foreach ($categoryList as $value) {
                     $categoryName = $value["name"];

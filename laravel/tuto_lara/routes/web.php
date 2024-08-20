@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
@@ -75,10 +76,10 @@ Route::get("header", function () {
 });
 
 // Route with controller
-Route::get("controller/{id}",[TestController::class,"test"])->name("test");
+Route::get("controller/{id}", [TestController::class, "test"])->name("test");
 
 // view check condation;
-Route::get("check",function(){
+Route::get("check", function () {
     $html = "<h1>HTML</h1>";
 
     // if(view()->exists("Test.sec")){
@@ -87,9 +88,42 @@ Route::get("check",function(){
     //     dd("Not have");
     // }
 
-    if(View::exists("Test.sec")){
-       return view("Test.sec",["data"=>$html]);
-    }else{
+    if (View::exists("Test.sec")) {
+        return view("Test.sec", ["data" => $html]);
+    } else {
         dd("Not have");
+    }
+});
+
+Route::get("anc/test_1", function () {
+    return view("url_route_asset");
+})->name("test1");
+
+
+// api call by php
+Route::get("api/php", function () {
+    $url = file_get_contents("https://fakestoreapi.com/products"); //return array[object]
+    $res = json_decode($url);
+    // dd($res);
+    $filter = array_filter($res, fn($res) => $res->price < 100); //price<100;
+    // dd($filter);    // array->obj
+    foreach ($filter as $item) {
+        echo "
+            <small> " . $item->title . " || " . $item->price . "  <br></small>
+        ";
+    }
+});
+
+//api call with laravel //collect
+Route::get("api/laravel", function () {
+    $data = Http::get("https://fakestoreapi.com/products")->json(); // return array[array]
+    // dd($data);
+    $collection = collect($data); // json array to >> collection array
+    $filter = $collection->where("price","<",100); //filter
+    // dd($filter);    // array->array
+    foreach($filter as $item){
+        echo "<pre>";
+        // print_r($item["title"]);
+        echo $item["title"];
     }
 });

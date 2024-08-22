@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\View;
@@ -155,16 +156,15 @@ Route::get("products/{id}", function ($id) {
 });
 
 
-
-
-
 // session
 Route::get("session", function (Request $request) {
     $request->session()->put("key", "value");       //session create
     session()->put("key2", "value2");               //session create
     session()->put("key3", "value3");               //session create
+    // dd(session()->has("key2"));                  //return true:false
     session()->forget("key");                       //session delete
     Session::flush();                               //all session del
+    Session::flash("key","new value");              //session create
     dd(session()->get("key"), session()->get("key2"), session()->get("key3"));       // session get
 });
 
@@ -186,6 +186,7 @@ Route::post("make", function (Request $request) {
 
 Route::get("/views", function () {
     $data = Session::get("data");
+    // $data = Session::all();
     // dd($data);
     if (session()->exists("data")) {
         if (!empty($data["title"] && $data["description"])) {
@@ -195,6 +196,29 @@ Route::get("/views", function () {
         }
     }
 })->name("views");
+
+
+// date/carbon
+Route::get("date",function(){
+    // dd(Carbon::now());
+    $date = Carbon::now();
+    echo $date;
+});
+
+
+// form|csrf_token
+Route::get("/form",function(){
+    echo  "CSRF_token  :: ".csrf_token()."<br>";          // Cross-site request forgeries
+    print_r($_REQUEST);
+    return view("test.form");
+});
+
+Route::post("/form",function(Request $request){
+    // dd($request->all());
+    // dd($request->number);
+    $res = $request->number +$request->number2;
+    dd($res);
+});
 
 
 

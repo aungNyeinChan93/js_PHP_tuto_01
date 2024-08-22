@@ -1,8 +1,10 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\TestController;
 
 /*
@@ -119,11 +121,80 @@ Route::get("api/laravel", function () {
     $data = Http::get("https://fakestoreapi.com/products")->json(); // return array[array]
     // dd($data);
     $collection = collect($data); // json array to >> collection array
-    $filter = $collection->where("price","<",100); //filter
+    $filter = $collection->where("price", "<", 100); //filter
     // dd($filter);    // array->array
-    foreach($filter as $item){
+    foreach ($filter as $item) {
         echo "<pre>";
         // print_r($item["title"]);
         echo $item["title"];
     }
 });
+
+// to_route
+Route::get("user/to_route", function () {
+    return to_route("test1");
+});
+
+
+
+// products
+Route::get("products", function () {
+    $products = Http::get("https://fakestoreapi.com/products")->json();
+    $filter = collect($products);
+    // dd($filter);
+    // $filter = $products_collection->where("id", "<=", 10);
+    return view("Test.products", compact("filter"));
+});
+
+Route::get("products/{id}", function ($id) {
+    $products = Http::get("https://fakestoreapi.com/products")->json();
+    // $res= array_filter($products,fn($product)=> $product["id"] ==$id);
+    $res = collect($products)->where("id", "==", $id);
+    // dd($res);
+    return view("test.detail", compact("res"));
+});
+
+
+
+
+
+// session
+Route::get("session", function (Request $request) {
+    $request->session()->put("key", "value");       //session create
+    session()->put("key2", "value2");               //session create
+    session()->put("key3", "value3");               //session create
+    session()->forget("key");                       //session delete
+    Session::flush();                               //all session del
+    dd(session()->get("key"), session()->get("key2"), session()->get("key3"));       // session get
+});
+
+Route::get("make", function () {
+    // dd(session()->get("data"));
+    return view("Test.make");
+
+});
+
+Route::post("make", function (Request $request) {
+    $data = [
+        "title" => $request["title"],
+        "description" => $request["description"]
+    ];
+    Session::put("data", $data);
+    // dd(Session::get("data"));
+    return to_route("views");
+});
+
+Route::get("/views", function () {
+    $data = Session::get("data");
+    // dd($data);
+    if (session()->exists("data")) {
+        if (!empty($data["title"] && $data["description"])) {
+            return view("test.view", compact("data"));
+        } else {
+            dd("data is empty");
+        }
+    }
+})->name("views");
+
+
+

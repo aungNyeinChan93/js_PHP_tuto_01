@@ -8,6 +8,7 @@
     <title>Document</title>
     {{-- asset to point >>public folder! --}}
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    
 </head>
 
 <body>
@@ -18,6 +19,7 @@
         <hr>
         {{-- route point >> routes/web/routeName --}}
         {{ route('test1') }}
+
         <hr>
         {{-- asset to point >> public folder! --}}
         {{asset("")}}

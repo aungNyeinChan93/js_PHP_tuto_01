@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\TestController;
+use Faker\Guesser\Name;
 
 /*
 |--------------------------------------------------------------------------
@@ -164,7 +165,7 @@ Route::get("session", function (Request $request) {
     // dd(session()->has("key2"));                  //return true:false
     session()->forget("key");                       //session delete
     Session::flush();                               //all session del
-    Session::flash("key","new value");              //session create
+    Session::flash("key", "new value");              //session create
     dd(session()->get("key"), session()->get("key2"), session()->get("key3"));       // session get
 });
 
@@ -199,7 +200,7 @@ Route::get("/views", function () {
 
 
 // date/carbon
-Route::get("date",function(){
+Route::get("date", function () {
     // dd(Carbon::now());
     $date = Carbon::now();
     echo $date;
@@ -207,18 +208,42 @@ Route::get("date",function(){
 
 
 // form|csrf_token
-Route::get("/form",function(){
-    echo  "CSRF_token  :: ".csrf_token()."<br>";          // Cross-site request forgeries
+Route::get("/form", function () {
+    echo "CSRF_token  :: " . csrf_token() . "<br>";          // Cross-site request forgeries
     print_r($_REQUEST);
     return view("test.form");
 });
 
-Route::post("/form",function(Request $request){
+Route::post("/form", function (Request $request) {
     // dd($request->all());
     // dd($request->number);
-    $res = $request->number +$request->number2;
+    $res = $request->number + $request->number2;
     dd($res);
 });
 
+
+//validation
+Route::get("form/validation", function () {
+    return view("Form.validation");
+});
+
+Route::post("form/validation", function (Request $request) {
+    $validation = $request->validate([
+        "name" => "required|max:20|min:3",
+        "email" => "required",
+        "password" => "required|numeric|min:5|same:passwordsec",
+        "passwordsec" => "required|numeric|same:password",
+        "message" => "required|max:255|min:3",
+        "language" => "required",
+        "gender" => "required",
+        "lvl" => "required",
+    ], [
+        "name.required" => "Поле name является обязательным для заполнения.",
+        "password.numeric" => "Password must be numeric type and min:3 and max:20 only!",
+    ]);
+    $validateData = $request->all();
+    // dd($validateData);
+    return back()->with(["message" => "Form success!"]);
+})->name("validation");
 
 

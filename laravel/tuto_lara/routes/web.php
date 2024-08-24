@@ -1,15 +1,16 @@
 <?php
 
-use App\Http\Controllers\Resource\ResourceController;
 use Carbon\Carbon;
+use Faker\Guesser\Name;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
+use App\Http\Requests\ValidateRequest;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\TestController;
-use App\Http\Requests\ValidateRequest;
-use Faker\Guesser\Name;
+use App\Http\Controllers\Resource\ResourceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -276,5 +277,21 @@ Route::post("fileupload", function (Request $request) {
 
 // resource Route
 Route::resource("test",ResourceController::class);
+
+// collect amd methods
+Route::get("collect", function () {
+    $data = ["mgmg", "aung", "chan"];
+    $map = collect($data)->map(function ($item) {
+        return strtoupper($item);
+    });
+    $filter = collect($data)->filter(function ($item) {
+        return $item == "aung";
+    });
+    dd($filter);
+});
+
+Route::get("pluck",function(){
+    dd(Customer::pluck("name","id"));
+});
 
 

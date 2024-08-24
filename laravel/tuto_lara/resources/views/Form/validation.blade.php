@@ -8,6 +8,11 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 </head>
+ <style>
+    .border{
+        border:10px solid red;
+    }
+ </style>
 
 <body>
 
@@ -21,7 +26,9 @@
             @endif
             <form action="{{route("validation")}}" class=" shadow-sm p-3 rounded " method="POST">
                 @csrf
-                <input type="text" name="name" value="{{old("name")}}" class="form-control my-1  @error("name") is-invalid @enderror " placeholder="Enter Name...">
+                <input type="text" name="name" value="{{old("name")}}" class="form-control my-1
+                @error("name") is-invalid @enderror "
+                placeholder="Enter Name...">
                 @error("name")
                     <small class=" d-block alert alert-warning">
                         {{$message}}
@@ -83,11 +90,14 @@
                 <input type="submit" value="Send" class="btn btn-sm btn-info my-1">
             </form>
         </div>
-        <div class="col-5 offset-1">
+        <div class="col-4 offset-1 mt-5 shadow-sm rounded p-2">
             <div class="container">
                 <ul>
-                    {{-- <li>{{$validateData}}</li>  --}}
-                    {{-- {{dd($validateData)}} --}}
+                    @if($errors->any())
+                        @foreach ($errors->all() as $e)
+                            <li class="alert alert-info">{{$e}}</li>
+                        @endforeach
+                    @endif
                 </ul>
             </div>
         </div>

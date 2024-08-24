@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Resource\ResourceController;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -7,6 +8,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\TestController;
+use App\Http\Requests\ValidateRequest;
 use Faker\Guesser\Name;
 
 /*
@@ -227,23 +229,52 @@ Route::get("form/validation", function () {
     return view("Form.validation");
 });
 
-Route::post("form/validation", function (Request $request) {
-    $validation = $request->validate([
-        "name" => "required|max:20|min:3",
-        "email" => "required",
-        "password" => "required|numeric|min:5|same:passwordsec",
-        "passwordsec" => "required|numeric|same:password",
-        "message" => "required|max:255|min:3",
-        "language" => "required",
-        "gender" => "required",
-        "lvl" => "required",
-    ], [
-        "name.required" => "Поле name является обязательным для заполнения.",
-        "password.numeric" => "Password must be numeric type and min:3 and max:20 only!",
-    ]);
+Route::post("form/validation", function (ValidateRequest $request) {
+    // $validation = $request->validate([
+    //     "name" => "required|max:20|min:3",
+    //     "email" => "required",
+    //     "password" => "required|numeric|min:5|same:passwordsec",
+    //     "passwordsec" => "required|numeric|same:password",
+    //     "message" => "required|max:255|min:3",
+    //     "language" => "required",
+    //     "gender" => "required",
+    //     "lvl" => "required",
+    // ], [
+    //     "name.required" => "Поле name является обязательным для заполнения.",
+    //     "password.numeric" => "Password must be numeric type and min:3 and max:20 only!",
+    // ]);
     $validateData = $request->all();
     // dd($validateData);
     return back()->with(["message" => "Form success!"]);
 })->name("validation");
+
+
+// fileupload
+Route::get("fileupload", function () {
+    return view("Test.fileupload");
+});
+
+Route::post("fileupload", function (Request $request) {
+    $validation = $request->validate([
+        "image" => "required|file|mimes:png,jpg"
+    ]);
+    // php
+    // $file = $_FILES["image"];
+    // $fileName = uniqid() . $file["name"];
+    // $tmp_name = $file["tmp_name"];
+    // $target = public_path() . "/image/" .$fileName;
+    // move_uploaded_file($tmp_name, $target);
+
+    //laravel
+    // dd(storage_path());
+    $file = $request->file("image");
+    $fileName = uniqid() . "_anc_" . $file->getClientOriginalName();
+    $file->move(public_path() . "/image/", $fileName);
+    dd("success!");
+
+});
+
+// resource Route
+Route::resource("test",ResourceController::class);
 
 

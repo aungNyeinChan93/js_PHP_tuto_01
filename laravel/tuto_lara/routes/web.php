@@ -1,8 +1,15 @@
 <?php
 
+use App\Test;
+use App\Sample;
+use App\Service;
+use App\Container;
 use Carbon\Carbon;
+use App\MyContainer;
+use App\SampleFacade;
 use Faker\Guesser\Name;
 use App\Models\Customer;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\View;
@@ -276,9 +283,9 @@ Route::post("fileupload", function (Request $request) {
 });
 
 // resource Route
-Route::resource("test",ResourceController::class);
+Route::resource("test", ResourceController::class);
 
-// collect amd methods
+// collect -> map ,filter
 Route::get("collect", function () {
     $data = ["mgmg", "aung", "chan"];
     $map = collect($data)->map(function ($item) {
@@ -290,8 +297,79 @@ Route::get("collect", function () {
     dd($filter);
 });
 
-Route::get("pluck",function(){
-    dd(Customer::pluck("name","id"));
+//pluck
+Route::get("pluck", function () {
+    dd(Customer::pluck("name", "id"));
 });
+
+// flatten
+Route::get("flatten", function () {
+    $data = [
+        [1, 2, 3, 4, 5],
+        ["aa", "bb", "cc"],
+        ["name" => "chan", "age" => 20],
+    ];
+    $flatten = Arr::flatten($data);
+    dd($flatten);
+    //a multi-dimensional array into a single level array:
+    /* result
+        0 => 1
+        1 => 2
+        2 => 3
+        3 => 4
+        4 => 5
+        5 => "aa"
+        6 => "bb"
+        7 => "cc"
+        8 => "chan"
+        9 => 20
+        ]
+    */
+});
+
+// Container
+Route::get("container", function () {
+    $container = new MyContainer;
+
+    $container->bind("key", function () {
+        return new Test();
+    });
+    $res = $container->resolve("key");
+    dd($res->hello());
+});
+
+Route::get("laravelContainer",function(){
+    // app()->singleton("key","val");   // same instance return
+    app()->bind("test",function(){      // diff instance return
+        return new Test();
+    });
+    $res = resolve("test");  //  resolve = check key>> || class instance -> return
+    dd($res->hello());
+});
+
+//bind and resolve form appserviceprovider
+Route::get("myservice",function(Test $service_1 ,Service $service_2){
+    dd($service_1,$service_2);
+});
+
+// facades
+Route::get("facades",function(Request $request){
+    // dd(resolve("view"));
+    // dd(resolve("redirect"));
+    // dd(resolve("request"));
+    // dd(request()->name);
+    // dd(request("name"));
+    dd($request->name);
+    // return View::make("Test.make");
+});
+
+Route::get("sampleServiceProvider",function( Service $sample_2){
+    // dd(resolve("test")->hello());
+    // return SampleFacade::hello();
+    // dd(resolve("sample")->name);
+    dd($sample_2->name(),resolve("sample")->name);
+});
+
+
 
 

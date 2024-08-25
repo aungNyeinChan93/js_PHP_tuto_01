@@ -7,6 +7,12 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Mail Template</h1>
+        <ul>
+            <li>{{$data["name"]}}</li>
+            <li>{{$data["age"]}}</li>
+            <li>{{$data["phone"]}}</li>
+        </ul>
+     
+
 </body>
 </html>

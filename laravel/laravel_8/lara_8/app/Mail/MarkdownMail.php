@@ -26,7 +26,7 @@ class MarkdownMail extends Mailable
      *
      * @return $this
      */
-    public function build()
+    public function build() 
     {
         return $this->markdown('mark')->subject("mark down format!");
     }

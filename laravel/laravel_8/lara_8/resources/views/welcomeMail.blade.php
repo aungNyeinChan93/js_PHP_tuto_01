@@ -7,16 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-        {{-- <ul>
-            <li>{{$data["name"]}}</li>
-            <li>{{$data["age"]}}</li>
-            <li>{{$data["phone"]}}</li>
-        </ul> --}}
-        {{$data->id}}
-        {{$data->name}}
-        {{$data->email}}
-     
-
-
+    <h1>hello welcome user </h1>
 </body>
 </html>

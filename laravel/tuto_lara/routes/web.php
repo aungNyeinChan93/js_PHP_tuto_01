@@ -12,6 +12,7 @@ use App\Models\Customer;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
 use App\Http\Requests\ValidateRequest;
@@ -338,9 +339,9 @@ Route::get("container", function () {
     dd($res->hello());
 });
 
-Route::get("laravelContainer",function(){
+Route::get("laravelContainer", function () {
     // app()->singleton("key","val");   // same instance return
-    app()->bind("test",function(){      // diff instance return
+    app()->bind("test", function () {      // diff instance return
         return new Test();
     });
     $res = resolve("test");  //  resolve = check key>> || class instance -> return
@@ -348,12 +349,12 @@ Route::get("laravelContainer",function(){
 });
 
 //bind and resolve form appserviceprovider
-Route::get("myservice",function(Test $service_1 ,Service $service_2){
-    dd($service_1,$service_2);
+Route::get("myservice", function (Test $service_1, Service $service_2) {
+    dd($service_1, $service_2);
 });
 
 // facades
-Route::get("facades",function(Request $request){
+Route::get("facades", function (Request $request) {
     // dd(resolve("view"));
     // dd(resolve("redirect"));
     // dd(resolve("request"));
@@ -363,13 +364,32 @@ Route::get("facades",function(Request $request){
     // return View::make("Test.make");
 });
 
-Route::get("sampleServiceProvider",function( Service $sample_2){
+Route::get("sampleServiceProvider", function (Service $sample_2) {
     // dd(resolve("test")->hello());
     // return SampleFacade::hello();
     // dd(resolve("sample")->name);
-    dd($sample_2->name(),resolve("sample")->name);
+    dd($sample_2->name(), resolve("sample")->name);
 });
 
+// temporary session
+Route::get("session/flash", function () {
+    session()->flash("message", config("mail.from.name")); //use config method
+    return view("Test.overallTest")->with("status", "helloworld");
+});
 
+//config
+Route::get("config", function () {
+    dd(config("mail.from.name"), config("app.aliases.DB"), config("mail.from.address"));
+});
 
+Route::get("config/anc", function () {
+    dd(config("anc.about.age"));
+});
 
+// mail->raw
+Route::get("mail", function () {
+    Mail::raw("Mail Body ...!", function ($mess) {
+        $mess->to("anc@gmail.com")->subject("ANC Subject ");
+    });
+    return "mail success";
+});

@@ -86,4 +86,9 @@ Route::get("eventlistener",function(){
 });
 
 
+// livewire
+Route::get("livewire",function(){
+    return view("livewire.test");
+});
+
 

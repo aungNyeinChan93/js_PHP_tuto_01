@@ -4,12 +4,13 @@ use App\Test;
 use App\Sample;
 use App\Service;
 use App\Container;
-use App\Http\Controllers\CarController;
 use Carbon\Carbon;
+use App\Models\Car;
 use App\MyContainer;
 use App\SampleFacade;
 use Faker\Guesser\Name;
 use App\Models\Customer;
+use App\Models\UuidTest;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
 use App\Http\Requests\ValidateRequest;
+use App\Http\Controllers\CarController;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\Resource\ResourceController;
@@ -397,18 +399,50 @@ Route::get("mail", function () {
 
 
 // MVC
-Route::get("cars/old",[CarController::class,"old"]);
-Route::get("cars/new",[CarController::class,"new"]);
-Route::get("cars/all",[CarController::class,"all"]);
-Route::get("cars/select",[CarController::class,"select"]);
-Route::get("cars/where",[CarController::class,"where"]);
-Route::get("cars/value",[CarController::class,"value"]);
-Route::get("cars/find",[CarController::class,"find"]);
-Route::get("cars/findOrFail",[CarController::class,"findOrFail"]);
-Route::get("cars/combine",[CarController::class,"combine"]);
-Route::get("cars/pluck",[CarController::class,"pluck"]);
-Route::get("cars/count",[CarController::class,"count"]);
-Route::get("cars/get",[CarController::class,"get"]);
-Route::post("cars/post/{id}",[CarController::class,"post"]);
-Route::get("cars/whereAny",[CarController::class,"whereAny"]);
-Route::get("cars/orderBy",[CarController::class,"orderBy"]);
+Route::get("cars/old", [CarController::class, "old"]);
+Route::get("cars/new", [CarController::class, "new"]);
+Route::get("cars/all", [CarController::class, "all"]);
+Route::get("cars/select", [CarController::class, "select"]);
+Route::get("cars/where", [CarController::class, "where"]);
+Route::get("cars/value", [CarController::class, "value"]);
+Route::get("cars/find", [CarController::class, "find"]);
+Route::get("cars/findOrFail", [CarController::class, "findOrFail"]);
+Route::get("cars/combine", [CarController::class, "combine"]);
+Route::get("cars/pluck", [CarController::class, "pluck"]);
+Route::get("cars/count", [CarController::class, "count"]);
+Route::get("cars/get", [CarController::class, "get"]);
+Route::post("cars/post/{id}", [CarController::class, "post"]);
+Route::get("cars/whereAny", [CarController::class, "whereAny"]);
+Route::get("cars/orderBy", [CarController::class, "orderBy"]);
+
+
+//The refresh method will re-hydrate the existing model using fresh data from the database.
+Route::get("refresh", function () {
+    $id = UuidTest::create([
+        "title" => "This is title",
+    ]);
+    $id->title = "new";
+    $id->refresh();
+    dd($id->toArray());  // this is title back
+});
+
+// chunk
+/*
+    The chunk method in Laravel is a useful tool
+    for processing large datasets
+    by breaking them into smaller,more manageable pieces.
+    This can help improve performance and avoid memory issues.
+*/
+Route::get("chunk", function () {
+    Car::chunkById(10, function ($cars) {
+        foreach ($cars as $car) {
+            echo "$car->id <br>";
+        }
+    });
+
+    $collection = collect([1, 2, 3, 4, 5, 6, 7]);
+    $chunks = $collection->chunk(3);
+    dd($chunks->all());
+    // Output: [[1, 2, 3], [4, 5, 6], [7]]
+
+});

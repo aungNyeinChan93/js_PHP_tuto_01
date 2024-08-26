@@ -4,6 +4,7 @@ use App\Test;
 use App\Sample;
 use App\Service;
 use App\Container;
+use App\Http\Controllers\CarController;
 use Carbon\Carbon;
 use App\MyContainer;
 use App\SampleFacade;
@@ -393,3 +394,21 @@ Route::get("mail", function () {
     });
     return "mail success";
 });
+
+
+// MVC
+Route::get("cars/old",[CarController::class,"old"]);
+Route::get("cars/new",[CarController::class,"new"]);
+Route::get("cars/all",[CarController::class,"all"]);
+Route::get("cars/select",[CarController::class,"select"]);
+Route::get("cars/where",[CarController::class,"where"]);
+Route::get("cars/value",[CarController::class,"value"]);
+Route::get("cars/find",[CarController::class,"find"]);
+Route::get("cars/findOrFail",[CarController::class,"findOrFail"]);
+Route::get("cars/combine",[CarController::class,"combine"]);
+Route::get("cars/pluck",[CarController::class,"pluck"]);
+Route::get("cars/count",[CarController::class,"count"]);
+Route::get("cars/get",[CarController::class,"get"]);
+Route::post("cars/post/{id}",[CarController::class,"post"]);
+Route::get("cars/whereAny",[CarController::class,"whereAny"]);
+Route::get("cars/orderBy",[CarController::class,"orderBy"]);

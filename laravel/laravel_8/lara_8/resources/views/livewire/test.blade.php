@@ -16,7 +16,7 @@
 
 
 
-    @livewireScripts;
+            @livewireScripts;
 </body>
 
 </html>

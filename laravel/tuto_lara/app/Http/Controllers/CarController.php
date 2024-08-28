@@ -99,8 +99,9 @@ class CarController extends Controller
     }
 
     // post method
-    public function post(Request $request ,$id){
-        dd(Car::find($id)->toArray());
+    public function post(Request $request ,Car $id){
+        // dd(Car::find($id)->toArray());
+        dd($id->toArray());// route model binding
     }
     // whereAny
     public function whereAny(){
@@ -114,3 +115,6 @@ class CarController extends Controller
         dd($cars);
     }
 }
+
+
+// crud sample

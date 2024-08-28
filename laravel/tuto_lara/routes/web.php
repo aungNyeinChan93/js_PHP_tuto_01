@@ -19,9 +19,12 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
 use App\Http\Requests\ValidateRequest;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\Resource\ResourceController;
+use App\Models\Product;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,9 +56,9 @@ Route::get("nameRoute", function () {
     return redirect()->route("hw");
 });
 
-Route::get("/product/{productName?}", function ($productName = "default parameter") {
-    dd("Product name is $productName");
-})->name("product");
+// Route::get("/product/{productName?}", function ($productName = "default parameter") {
+//     dd("Product name is $productName");
+// })->name("product");
 
 // name route with parameter
 Route::get("test", function () {
@@ -446,3 +449,21 @@ Route::get("chunk", function () {
     // Output: [[1, 2, 3], [4, 5, 6], [7]]
 
 });
+
+
+// crud sample
+Route::get("customers/create",[CustomerController::class,"create"])->name("customers.create");
+Route::get("customers/list",[CustomerController::class,"list"])->name("customers.list");
+Route::get("customers/detail/{customer}",[CustomerController::class,"detail"])->name("customers.detail");
+Route::get("customers/update/{customer}",[CustomerController::class,"update"])->name("customers.update");
+Route::get("customers/delete/{customer}",[CustomerController::class,"delete"])->name("customers.delete");
+
+
+// yield/extends/section
+Route::get("yield",function(){
+    return view("Test.sample");
+});
+
+// resource route sample crud
+Route::resource("product",ProductController::class);
+

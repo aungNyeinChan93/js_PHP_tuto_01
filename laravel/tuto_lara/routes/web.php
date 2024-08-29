@@ -4,6 +4,7 @@ use App\Test;
 use App\Sample;
 use App\Service;
 use App\Container;
+use App\Http\Controllers\AdminController;
 use Carbon\Carbon;
 use App\Models\Car;
 use App\MyContainer;
@@ -466,4 +467,9 @@ Route::get("yield",function(){
 
 // resource route sample crud
 Route::resource("product",ProductController::class);
+
+// admin form
+Route::get("admin/index",[AdminController::class,"index"]);
+Route::get("admin/create",[AdminController::class,"create"]);
+Route::post("admin/create",[AdminController::class,"store"]);
 

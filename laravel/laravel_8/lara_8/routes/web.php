@@ -1,6 +1,7 @@
 <?php
 
 use App\Events\UserEventTest;
+use App\Http\Controllers\PostController;
 use App\Mail\WelcomeMail;
 use App\Models\User;
 use App\Mail\TestMail;
@@ -91,4 +92,7 @@ Route::get("livewire",function(){
     return view("livewire.test");
 });
 
+
+// database relationship
+Route::get("databaseRelationship",[PostController::class,"index"]);
 

@@ -1,15 +1,16 @@
 <?php
 
-use App\Events\UserEventTest;
-use App\Http\Controllers\PostController;
-use App\Mail\WelcomeMail;
 use App\Models\User;
 use App\Mail\TestMail;
+use App\Mail\WelcomeMail;
 use App\Mail\MarkdownMail;
+use App\Events\UserEventTest;
 use App\Notifications\MyNoti;
 use App\Notifications\UserNoti;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Notification;
 
 /*
@@ -23,9 +24,9 @@ use Illuminate\Support\Facades\Notification;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 // mail->raw -->Raw file
 Route::get("mail",function(){
@@ -95,4 +96,30 @@ Route::get("livewire",function(){
 
 // database relationship
 Route::get("databaseRelationship",[PostController::class,"index"]);
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+//middleware and group route
+Route::middleware(['auth'])->group(function () {
+    Route::get("users",function(){
+        return "this is users page";
+    });
+    Route::get("stuff",function(){
+        return "this is stuff page";
+    });
+});
+
+// prefix
+Route::prefix('admin')->middleware("auth")->group(function () {
+   Route::get("list",function(){
+    return "Admin List";
+   });
+});
+
+
+
 

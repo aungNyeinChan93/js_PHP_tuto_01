@@ -28,7 +28,11 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('home', absolute: false));
+        if($request->user()->role == "user"){
+            return redirect()->intended(route('home', absolute: false));
+        }else{
+            return to_route("adminPage");
+        }
     }
 
     /**
@@ -42,6 +46,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/custome/register');
+        return redirect('/custome/login');
     }
 }

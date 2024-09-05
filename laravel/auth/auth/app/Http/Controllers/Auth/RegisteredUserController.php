@@ -27,7 +27,7 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -41,10 +41,16 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        event(new Registered($user));
+        // event(new Registered($user));
+        // Auth::login($user);
+        return to_route("custome.login");
+        // return redirect(route('home', absolute: false));
 
-        Auth::login($user);
+        // if($request->user()->role == "user"){
+        //     return to_route("home");
+        // }else{
+        //     return to_route("adminPage");
+        // }
 
-        return redirect(route('home', absolute: false));
     }
 }

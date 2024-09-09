@@ -27,6 +27,8 @@ use App\Http\Controllers\TestController;
 use App\Http\Controllers\Resource\ResourceController;
 use App\Models\Product;
 
+require_once __DIR__ ."/tuto.php";
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes

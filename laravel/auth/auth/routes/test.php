@@ -1,8 +1,9 @@
 <?php
 
+use App\Models\User;
+use App\Mail\WelcomeMail;
 use App\Mail\MarkdownMail;
 use App\Mail\PromotionMail;
-use App\Mail\WelcomeMail;
 use Illuminate\Mail\Markdown;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -44,3 +45,8 @@ Route::any("markDown",function(){
     return "Success!";
 });
 
+// scout
+Route::get("scout",function(){
+    $userName = User::search("leatha.dietrich@example.org Dr. Judy Hill III")->get();
+    return $userName;
+});
